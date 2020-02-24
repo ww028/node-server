@@ -6,21 +6,26 @@ let postsGet = (data, success) => {
   let params = ''
   let params_arr = []
   let index = 0;
+
   if(data.id){
     params_arr[index] = `id=${data.id}`
     index ++
   }
+
   if(data.title){
     params_arr[index] = `title like '%${data.title}%'`
     index++
   }
+
   if(data.name){
     params_arr[index] = `name like '%${data.name}%'`
     index++
   }
+
   params = params_arr.join(' AND ')
+
   if(params){
-    sql = sql + ` WHERE ${params}`
+    sql += ` WHERE ${params}`
   }
 
   console.log(sql)

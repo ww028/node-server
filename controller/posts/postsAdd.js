@@ -7,7 +7,7 @@ let postsAdd = (data, success) => {
   if(data.id){
     sql = `UPDATE posts SET title='${data.title}', name='${data.name}' WHERE id=${data.id}`;
   } else {
-    sql = 'INSERT INTO posts(title,name) VALUES(?,?)';
+    sql =  `INSERT INTO posts(title,name) VALUES ('${data.title}', '${data.name}')`;
   }
 
   /**
@@ -25,17 +25,17 @@ let postsAdd = (data, success) => {
     if (error) {
       resultData.error = error.message;
       resultData.data = {
-        data: [],
-        status: false
+        status: false,
+        data: []
       }
     } else {
       resultData.data = {
-        data: result,
-        status: true
-      };
+        status: true,
+        data: result
+      }
     }
-    resultData.code = 200;
     resultData.status = true;
+    resultData.code = 200;
     resultData.codeMessage = "success";
     success(resultData);
   });

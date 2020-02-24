@@ -6,7 +6,6 @@ let productEditOrAdd = require('../controller/product/productEditOrAdd.js')
 let createTable = require('../controller/createTable.js')
 let postsGet = require('../controller/posts/postsGet.js')
 let postsAdd = require('../controller/posts/postsAdd.js')
-let postsSearch = require('../controller/posts/postsSearch.js')
 let postsDelete = require('../controller/posts/postsDelete.js')
 
 /* GET home page. */
@@ -23,14 +22,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/post/get', function(req, res, next) {
   postsGet(req.body, data =>{
-    console.log(data)
-    res.end(JSON.stringify(data))
-  })
-});
-
-router.get('/post/search/:id', function(req, res, next) {
-  req.query.params = req.params
-  postsSearch(req.query, data =>{
     console.log(data)
     res.end(JSON.stringify(data))
   })
