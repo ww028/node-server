@@ -2,21 +2,29 @@ let db_help = require("../../config/dbHelp.js");
 
 let postsGet = (data, success) => {
   console.log(data)
-  let params=''
-  let sql = ''
+  let sql = 'SELECT * FROM posts'
+  let params = ''
+  let params_arr = []
+  let index = 0;
   if(data.id){
-    params = 'id'
-  } else if(data.name){
-    params = 'name'
-  } else if(data.params){
-    params = 'title'
+    params_arr[index] = `id=${data.id}`
+    index ++
   }
-  if(data.id || data.name){
-    sql = `SELECT * FROM posts WHERE id=${data.id}`;
-  } else {
-    sql = "SELECT * FROM posts";
+  if(data.title){
+    params_arr[index] = `title like '%${data.title}%'`
+    index++
   }
- 
+  if(data.name){
+    params_arr[index] = `name like '%${data.name}%'`
+    index++
+  }
+  params = params_arr.join(' AND ')
+  if(params){
+    sql = sql + ` WHERE ${params}`
+  }
+
+  console.log(sql)
+  
   /**
    * resultData
    * @code: 状态码
