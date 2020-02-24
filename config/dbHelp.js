@@ -21,6 +21,9 @@ let pool = mysql.createPool({
   password: db_config.database.password,
   database: db_config.database.database,
   prot: db_config.database.prot,
+  waitForConnections: true, //当无连接池可用时，等待（true）还是抛错（false）
+  connectionLimit: 100, //连接数限制
+  queueLimit: 0 //最大连接等待数（0为不限制）
 })
 
 let query = (sql, options, callback) =>{
