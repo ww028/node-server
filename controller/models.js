@@ -1,9 +1,9 @@
 const query = require('../mysql/pool')
 
-const models_list = (data, success) =>{
+const models_list = (data, success) => {
   let sql = 'SELECT * FROM models'
-  
-  if(data.id){
+
+  if (data.id) {
     sql += ` WHERE id='${data.id}'`
   }
 

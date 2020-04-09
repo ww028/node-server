@@ -1,6 +1,6 @@
 const query = require('../mysql/pool')
 
-const article_type = (data, success) =>{
+const article_type = (data, success) => {
   let sql = 'SELECT * FROM articletype'
 
   const resultData = {
