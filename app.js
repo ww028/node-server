@@ -1,25 +1,29 @@
 const express = require('express')
 const app = express()
-const router = require('./router/index')
-const bodyParser = require('body-parser');
+const mysql = require('mysql')
 
-// 解决跨域
-app.all('*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "X-Requested-With")
-  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
-  res.header("X-Powered-By", ' 3.2.1')
-  res.header("Content-Type", "application/json;charset=utf-8")
-  if (req.method == 'OPTIONS') {
-    res.send(200)
-  } else {
-    next()
-  }
+const connection = mysql.createConnection({
+  host: '数据库地址',
+  user: '用户名',
+  password: '密码',
+  database: '数据库名'
+});
+
+connection.connect();
+
+// 示例get 请求，第一个参数就是接口路径
+app.get('/list', function (err, res) {
+  const sql = 'select * from 表名';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR] - ', err.message);
+      return;
+    }
+    // result 返回数据
+    // 转换为json 格式
+    res.json(result);
+  });
 })
-
-//解析post请求数据
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(router)
 
 app.listen(5001, '127.0.0.1', function () {
   console.log("http://127.0.0.1:5001");
