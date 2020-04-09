@@ -6,8 +6,8 @@ npm install
 # start
 npm start
 ```
-> /controller 接口文件 </br>
->>   /name.js 接口 </br>
+> /controller 接口文件   
+>>   /name.js 接口   
 > /mysql 数据库 </br>
 >>   /config copy.js 数据库配置 </br>
 >>   /config.js 数据库配置，这个文件没有上传，修改config copy.js 文件名为config.js </br>
